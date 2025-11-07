@@ -21,6 +21,7 @@ package() {
     cp virtual-drive $install_dir
     cp -r functions $install_dir
 
+    mkdir -p $(dirname $launcher)
     echo '#!/usr/bin/bash' > $launcher
     echo 'exec /usr/lib/virtual-drive "$@"' >> $launcher
 
