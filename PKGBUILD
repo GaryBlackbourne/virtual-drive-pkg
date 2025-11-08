@@ -1,5 +1,5 @@
 pkgname="virtual-drive"
-pkgver="0.1.0"
+pkgver="0.2.0"
 pkgrel=1
 pkgdesc="A command line utility managing virtual encrypted drives."
 arch=("any")
@@ -8,7 +8,7 @@ license=('GPL-2.0')
 
 makedepends=("git")
 source=("https://github.com/GaryBlackbourne/${pkgname}/archive/${pkgver}.tar.gz")
-sha256sums=("286b381b48416e21abf797d0b7ed8c1e9eb3d8ff250a5060902aa9c249a9797f")
+sha256sums=("856b3e18408a5694f6f9b0072ae6ffcafc2c64a84f73e230cbeea5391ff54558")
 
 package() {
 
@@ -23,7 +23,11 @@ package() {
 
     mkdir -p $(dirname $launcher)
     echo '#!/usr/bin/bash' > $launcher
-    echo 'exec /usr/lib/virtual-drive "$@"' >> $launcher
+    echo 'exec /usr/lib/virtual-drive/virtual-drive "$@"' >> $launcher
+
+    mkdir -p $pkgdir/usr/share/fish/vendor_completions.d
+    cp shell-completions/virtual-drive.fish \
+       $pkgdir/usr/share/fish/vendor_completions.d/
 
     chmod +x $launcher
 }
